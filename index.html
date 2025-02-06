@@ -105,14 +105,13 @@
             100% { top: 100%; }
         }
         @keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
-
-.heart-click {
-    animation: blink 0.5s infinite;
-}
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .heart-click {
+            animation: blink 0.5s infinite;
+        }
     </style>
 </head>
 <body>
@@ -120,27 +119,28 @@
         <div class="heart" id="heart"></div>
         <h1>HAPPY VALENTINE'S DAY💖</h1>
         <p>MY BENJI🥰</p>
-    <a href="https://drive.google.com/uc?export=view&id=1aK2ILSo9HMmdPnLdNaEzlihjc0gG3wEI" target="_blank">
-    <img src="https://drive.google.com/uc?export=view&id=1aK2ILSo9HMmdPnLdNaEzlihjc0gG3wEI" alt="Our Memory">
-</a>
-         
+        <a href="https://drive.google.com/uc?export=view&id=1aK2ILSo9HMmdPnLdNaEzlihjc0gG3wEI" target="_blank">
+            <img src="https://drive.google.com/uc?export=view&id=1aK2ILSo9HMmdPnLdNaEzlihjc0gG3wEI" alt="Our Memory">
+        </a>
         <p>OPEN TO SEE THE SECRET!💌</p>
-        <button onclick="showMessage(); startConfetti()">OPEN</button>
+        <button onclick="showMessage(); startConfetti(); playClickSound();">OPEN</button>
         <p class="hidden-message" id="secretMessage">Thanks for being mine, love chu bibi💕</p>
 
         <p>🎵 Music: <button onclick="toggleMusic()">Play / Pause</button></p>
     </div>
     
-        <button onclick="changeMood()">Change Mood</button>
+    <button onclick="changeMood()">Change Mood</button>
     
     <div class="confetti" id="confetti"></div>
     <iframe id="youtubePlayer" width="0" height="0" src="https://www.youtube.com/embed/XShaIZs7J7M?autoplay=1&loop=1&playlist=XShaIZs7J7M&mute=1" frameborder="0" allow="autoplay"></iframe>
+
+    <audio id="clickSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
 
     <script>
         function showMessage() {
             // 1. Start Heart Floating animation (Triggering the animation)
             var heart = document.getElementById('heart');
-            heart.style.animation = 'float 2s ease-in-out infinite'; // Ensure animation is active
+            heart.classList.add('heart-click'); // Add blinking effect to the heart
             
             // 2. Reveal Secret Message with typing effect
             var message = document.getElementById('secretMessage');
@@ -157,6 +157,11 @@
                 }
             }
             typeWriter(); // Start the typing effect
+        }
+
+        function playClickSound() {
+            var sound = document.getElementById('clickSound');
+            sound.play();
         }
 
         function toggleMusic() {
@@ -186,16 +191,11 @@
                 confettiContainer.innerHTML = '';
             }, 5000); // Hide confetti after 5 seconds
         }
-        function playClickSound() {
-    var sound = document.getElementById('clickSound');
-    sound.play();
-}
 
-function showMessage() {
-    playClickSound();  // เรียกใช้เสียง
-    // รหัสที่เหลือ
-}
+        function changeMood() {
+            document.body.style.backgroundColor = '#ffccff'; // เปลี่ยนสีพื้นหลัง
+            document.body.style.color = '#4d1a6f'; // เปลี่ยนสีตัวอักษร
+        }
     </script>
 </body>
 </html>
-
