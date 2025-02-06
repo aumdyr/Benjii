@@ -125,25 +125,25 @@
 
     <script>
         function showMessage() {
-            // 1. Start Heart Floating animation
+            // 1. Start Heart Floating animation (Triggering the animation)
             var heart = document.getElementById('heart');
             heart.style.animation = 'float 2s ease-in-out infinite'; // Ensure animation is active
             
-            // 2. Show Secret Message
+            // 2. Reveal Secret Message with typing effect
             var message = document.getElementById('secretMessage');
             var text = "Thanks for being mine, love chu bibi💕";
             var i = 0;
-            message.style.display = 'block';
-            message.style.opacity = 1;  // Make the message visible immediately
+            message.style.display = 'block'; // Make message visible
+            message.style.opacity = 1;  // Ensure the message is visible immediately
             message.innerHTML = ''; // Clear the message before typing
             function typeWriter() {
                 if (i < text.length) {
                     message.innerHTML += text.charAt(i);
                     i++;
-                    setTimeout(typeWriter, 100);
+                    setTimeout(typeWriter, 100); // Adjust typing speed by changing 100
                 }
             }
-            typeWriter();
+            typeWriter(); // Start the typing effect
         }
 
         function toggleMusic() {
@@ -175,4 +175,6 @@
         }
     </script>
 </body>
+</html>
+
 </html>
