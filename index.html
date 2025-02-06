@@ -21,6 +21,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             position: relative;
+            perspective: 1000px;
         }
         img {
             width: 100%;
@@ -50,6 +51,7 @@
         }
         button:hover {
             background-color: #ff4d94;
+            transform: rotateX(5deg) rotateY(5deg);
         }
         button:active {
             transform: scale(0.95);
@@ -102,6 +104,15 @@
             0% { top: -10px; }
             100% { top: 100%; }
         }
+        @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.heart-click {
+    animation: blink 0.5s infinite;
+}
     </style>
 </head>
 <body>
@@ -119,7 +130,9 @@
 
         <p>🎵 Music: <button onclick="toggleMusic()">Play / Pause</button></p>
     </div>
-
+    
+        <button onclick="changeMood()">Change Mood</button>
+    
     <div class="confetti" id="confetti"></div>
     <iframe id="youtubePlayer" width="0" height="0" src="https://www.youtube.com/embed/XShaIZs7J7M?autoplay=1&loop=1&playlist=XShaIZs7J7M&mute=1" frameborder="0" allow="autoplay"></iframe>
 
@@ -173,6 +186,15 @@
                 confettiContainer.innerHTML = '';
             }, 5000); // Hide confetti after 5 seconds
         }
+        function playClickSound() {
+    var sound = document.getElementById('clickSound');
+    sound.play();
+}
+
+function showMessage() {
+    playClickSound();  // เรียกใช้เสียง
+    // รหัสที่เหลือ
+}
     </script>
 </body>
 </html>
