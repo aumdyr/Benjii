@@ -73,11 +73,12 @@
             background-color: red;
             border-radius: 50%;
             animation: float 2s ease-in-out infinite;
+            transform: translateX(-50%);
         }
         @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
+            0% { transform: translateY(0) translateX(-50%); }
+            50% { transform: translateY(-20px) translateX(-50%); }
+            100% { transform: translateY(0) translateX(-50%); }
         }
         .confetti {
             position: absolute;
@@ -128,6 +129,7 @@
             var text = "Thanks for being mine, love chu bibi💕";
             var i = 0;
             message.style.display = 'block';
+            message.style.opacity = 1;  // Make the message visible immediately
             message.innerHTML = ''; // Clear the message before typing
             function typeWriter() {
                 if (i < text.length) {
@@ -166,10 +168,6 @@
                 confettiContainer.innerHTML = '';
             }, 5000); // Hide confetti after 5 seconds
         }
-    </script>
-</body>
-</html>
-
     </script>
 </body>
 </html>
