@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -12,6 +11,7 @@
             background-color: #f9f9f9;
             color: #333;
             padding: 20px;
+            cursor: url('https://www.iconfinder.com/data/icons/valentine-s-day-13/100/19-512.png'), auto; /* Custom cursor */
         }
         .container {
             max-width: 600px;
@@ -20,6 +20,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
         }
         img {
             width: 100%;
@@ -33,6 +34,7 @@
             color: #e44d4d;
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            font-family: 'Courier New', monospace;
         }
         button {
             padding: 10px 20px;
@@ -51,36 +53,60 @@
         button:active {
             transform: scale(0.95);
         }
-#youtubePlayer {
-    width: 1px;
-    height: 1px;
-    visibility: hidden;
-}
+        #youtubePlayer {
+            width: 1px;
+            height: 1px;
+            visibility: hidden;
+        }
+        .heart {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            animation: float 2s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="heart"></div> <!-- Floating heart -->
         <h1>HAPPY VALENTINE'S DAY💖</h1>
         <p>MY BENJI🥰</p>
         
-      
         <img src="https://drive.google.com/uc?export=view&id=1aK2ILSo9HMmdPnLdNaEzlihjc0gG3wEI" alt="Our Memory">
         
         <p>OPEN TO SEE THE SECRET!💌</p>
         <button onclick="showMessage()">OPEN</button>
-        <p class="hidden-message" id="secretMessage">Thanks for being mine, love chu bibi💕</p>
+        <p class="hidden-message" id="secretMessage"></p> <!-- Hidden message with typewriter effect -->
 
         <p>🎵 Music: <button onclick="toggleMusic()">Play / Pause</button></p>
     </div>
-
 
     <iframe id="youtubePlayer" width="0" height="0" src="https://www.youtube.com/embed/XShaIZs7J7M?autoplay=1&loop=1&playlist=XShaIZs7J7M&mute=1" frameborder="0" allow="autoplay"></iframe>
 
     <script>
         function showMessage() {
             var message = document.getElementById('secretMessage');
+            var text = "Thanks for being mine, love chu bibi💕";
+            var i = 0;
             message.style.display = 'block';
-            setTimeout(() => { message.style.opacity = 1; }, 10);
+            message.innerHTML = ''; // Clear the message before typing
+            function typeWriter() {
+                if (i < text.length) {
+                    message.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            typeWriter();
         }
 
         function toggleMusic() {
@@ -92,6 +118,10 @@
                 iframe.src = src.replace("mute=0", "mute=1");
             }
         }
+    </script>
+</body>
+</html>
+
     </script>
 </body>
 </html>
