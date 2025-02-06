@@ -11,7 +11,7 @@
             background-color: #f9f9f9;
             color: #333;
             padding: 20px;
-            cursor: url('https://www.iconfinder.com/data/icons/valentine-s-day-13/100/19-512.png'), auto; /* Custom cursor */
+            cursor: url('https://www.iconfinder.com/data/icons/valentine-s-day-13/100/19-512.png'), auto;
         }
         .container {
             max-width: 600px;
@@ -45,13 +45,19 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
-            transition: transform 0.1s;
+            transition: transform 0.1s, box-shadow 0.2s;
+            animation: pulse 2s infinite;
         }
         button:hover {
             background-color: #ff4d94;
         }
         button:active {
             transform: scale(0.95);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
         #youtubePlayer {
             width: 1px;
@@ -73,23 +79,47 @@
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0); }
         }
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 100;
+            display: none;
+        }
+        .confetti div {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff7eb3;
+            animation: fall 3s infinite;
+            border-radius: 50%;
+        }
+        @keyframes fall {
+            0% { top: -10px; }
+            100% { top: 100%; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="heart"></div> <!-- Floating heart -->
+        <div class="heart"></div>
         <h1>HAPPY VALENTINE'S DAY💖</h1>
         <p>MY BENJI🥰</p>
         
-        <img src="https://drive.google.com/uc?export=view&id=1aK2ILSo9HMmdPnLdNaEzlihjc0gG3wEI" alt="Our Memory">
+        <!-- Use a publicly accessible image URL -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Valentine_heart_image.png" alt="Our Memory">
         
         <p>OPEN TO SEE THE SECRET!💌</p>
-        <button onclick="showMessage()">OPEN</button>
-        <p class="hidden-message" id="secretMessage"></p> <!-- Hidden message with typewriter effect -->
+        <button onclick="showMessage(); startConfetti()">OPEN</button>
+        <p class="hidden-message" id="secretMessage"></p>
 
         <p>🎵 Music: <button onclick="toggleMusic()">Play / Pause</button></p>
     </div>
 
+    <div class="confetti" id="confetti"></div>
     <iframe id="youtubePlayer" width="0" height="0" src="https://www.youtube.com/embed/XShaIZs7J7M?autoplay=1&loop=1&playlist=XShaIZs7J7M&mute=1" frameborder="0" allow="autoplay"></iframe>
 
     <script>
@@ -117,6 +147,24 @@
             } else {
                 iframe.src = src.replace("mute=0", "mute=1");
             }
+        }
+
+        // Function to generate confetti
+        function startConfetti() {
+            var confettiContainer = document.getElementById('confetti');
+            confettiContainer.style.display = 'block';
+
+            for (var i = 0; i < 100; i++) {
+                var confettiPiece = document.createElement('div');
+                confettiPiece.style.left = Math.random() * 100 + 'vw';
+                confettiPiece.style.animationDuration = Math.random() * 2 + 3 + 's';
+                confettiContainer.appendChild(confettiPiece);
+            }
+
+            setTimeout(() => {
+                confettiContainer.style.display = 'none';
+                confettiContainer.innerHTML = '';
+            }, 5000); // Hide confetti after 5 seconds
         }
     </script>
 </body>
