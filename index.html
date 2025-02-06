@@ -73,6 +73,7 @@
             background-color: red;
             border-radius: 50%;
             animation: float 2s ease-in-out infinite;
+            transform: translateX(-50%);
         }
         @keyframes float {
             0% { transform: translateY(0) translateX(-50%); }
@@ -105,7 +106,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="heart"></div>
+        <div class="heart" id="heart"></div>
         <h1>HAPPY VALENTINE'S DAY💖</h1>
         <p>MY BENJI🥰</p>
         
@@ -124,6 +125,11 @@
 
     <script>
         function showMessage() {
+            // 1. Start Heart Floating animation
+            var heart = document.getElementById('heart');
+            heart.style.animation = 'float 2s ease-in-out infinite'; // Ensure animation is active
+            
+            // 2. Show Secret Message
             var message = document.getElementById('secretMessage');
             var text = "Thanks for being mine, love chu bibi💕";
             var i = 0;
@@ -167,10 +173,6 @@
                 confettiContainer.innerHTML = '';
             }, 5000); // Hide confetti after 5 seconds
         }
-    </script>
-</body>
-</html>
-
     </script>
 </body>
 </html>
