@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine's Day💕</title>
+    <title>Confetti Effect</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,168 +11,69 @@
             background-color: #f9f9f9;
             color: #333;
             padding: 20px;
-            cursor: url('https://www.iconfinder.com/icons/299063/heart_icon'), auto;
+            overflow: hidden;
         }
-        .container {
-            max-width: 90vw;
-            margin: auto;
-            background: lightpink;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        img {
-            width: 100%;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-        .hidden-message {
-            display: none;
-            margin-top: 20px;
-            font-size: 20px;
-            color: #e44d4d;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            font-family: 'Courier New', monospace;
-        }
-        button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #ff7eb3;
-            color: white;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: transform 0.1s, box-shadow 0.2s;
-            animation: pulse 2s infinite;
-        }
-        button:hover {
-            background-color: #ff4d94;
-        }
-        button:active {
-            transform: scale(0.95);
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        #youtubePlayer {
-            width: 1px;
-            height: 1px;
-            visibility: hidden;
-        }
-        .heart {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            width: 50px;
-            height: 50px;
-            background-color: red;
-            border-radius: 50%;
-            animation: float 2s ease-in-out infinite;
-            transform: translateX(-50%);
-        }
-        @keyframes float {
-            0% { transform: translateY(0) translateX(-50%) scale(1); }
-            50% { transform: translateY(-30px) translateX(-50%) scale(1.2); }
-            100% { transform: translateY(0) translateX(-50%) scale(1); }
-        }
-        .confetti {
+
+        .confetti-container {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            z-index: 100;
-            display: none;
+            z-index: 999;
         }
-        .confetti div {
+
+        .confetti {
             position: absolute;
             width: 10px;
             height: 10px;
-            background-color: #ff7eb3;
-            animation: fall 3s infinite;
             border-radius: 50%;
+            opacity: 0.8;
+            animation: fall 3s linear infinite;
         }
+
         @keyframes fall {
-            0% { top: -10px; }
-            100% { top: 100%; }
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="heart" id="heart"></div>
-        <h1>HAPPY VALENTINE'S DAY💖</h1>
-        <p>MY BENJI🥰</p>
-     <a href="https://drive.google.com/uc?export=view&id=1aK2ILSo9HMmdPnLdNaEzlihjc0gG3wEI" target="_blank">
-        <img src="https://drive.google.com/uc?export=view&id=1aK2ILSo9HMmdPnLdNaEzlihjc0gG3wEI" alt="Our Memory">
-    </a>
-         
-        <p>OPEN TO SEE THE SECRET!💌</p>
-        <button onclick="showMessage(); startConfetti()">OPEN</button>
-        <p class="hidden-message" id="secretMessage">Thanks for being mine, love chu bibi💕</p>
 
-        <p>🎵 Music: <button onclick="toggleMusic()">Play / Pause</button></p>
-    </div>
+    <h1>Click to Start Confetti! 🎉</h1>
+    <button onclick="startConfetti()">Start Confetti</button>
 
-    <div class="confetti" id="confetti"></div>
-    <iframe id="youtubePlayer" width="0" height="0" src="https://www.youtube.com/embed/XShaIZs7J7M?autoplay=1&loop=1&playlist=XShaIZs7J7M&mute=1" frameborder="0" allow="autoplay"></iframe>
+    <div class="confetti-container" id="confettiContainer"></div>
 
     <script>
-        function showMessage() {
-            // 1. Start Heart Floating animation (Triggering the animation)
-            var heart = document.getElementById('heart');
-            heart.style.animation = 'float 2s ease-in-out infinite'; // Ensure animation is active
-            
-            // 2. Reveal Secret Message with typing effect
-            var message = document.getElementById('secretMessage');
-            var text = "Thanks for being mine, love chu bibi💕";
-            var i = 0;
-            message.style.display = 'block'; // Make message visible
-            message.style.opacity = 1;  // Ensure the message is visible immediately
-            message.innerHTML = ''; // Clear the message before typing
-            function typeWriter() {
-                if (i < text.length) {
-                    message.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100); // Adjust typing speed by changing 100
-                }
-            }
-            typeWriter(); // Start the typing effect
-        }
-
-        function toggleMusic() {
-            var iframe = document.getElementById("youtubePlayer");
-            var src = iframe.src;
-            if (src.includes("mute=1")) {
-                iframe.src = src.replace("mute=1", "mute=0");
-            } else {
-                iframe.src = src.replace("mute=0", "mute=1");
-            }
-        }
-
-        // Function to generate confetti
         function startConfetti() {
-            var confettiContainer = document.getElementById('confetti');
-            confettiContainer.style.display = 'block';
+            let confettiContainer = document.getElementById("confettiContainer");
 
-            for (var i = 0; i < 100; i++) {
-                var confettiPiece = document.createElement('div');
-                confettiPiece.style.left = Math.random() * 100 + 'vw';
-                confettiPiece.style.animationDuration = Math.random() * 2 + 3 + 's';
-                confettiContainer.appendChild(confettiPiece);
+            for (let i = 0; i < 50; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                
+                // สุ่มตำแหน่ง
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.animationDuration = Math.random() * 2 + 3 + "s";
+                
+                // สลับสี
+                if (i % 2 === 0) {
+                    confetti.style.backgroundColor = "#ff4d94"; // ชมพู
+                } else {
+                    confetti.style.backgroundColor = "#ffd700"; // ทอง
+                }
+
+                confettiContainer.appendChild(confetti);
+
+                // ลบ confetti ออกหลังจากหมด animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
             }
-
-            setTimeout(() => {
-                confettiContainer.style.display = 'none';
-                confettiContainer.innerHTML = '';
-            }, 5000); // Hide confetti after 5 seconds
         }
     </script>
+
 </body>
 </html>
